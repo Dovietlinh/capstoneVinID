@@ -41,6 +41,12 @@ class CategoryFragment: Fragment() {
         var call=service.allCategory
         if(valueAction.equals("onThi")){
             call=service.allQuestion
+        }else if(valueAction.equals("thiThat")){
+
+        }else if(valueAction.equals("thiThu")){
+
+        }else{
+
         }
 
 
