@@ -1,4 +1,4 @@
-package com.example.capstoneproject.View
+package com.example.capstoneproject.View.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,11 @@ import android.view.View
 import android.widget.Toast
 import com.example.capstoneproject.Model.Category
 import com.example.capstoneproject.R
-import com.example.capstoneproject.ViewModel.ApiService
-import com.example.capstoneproject.ViewModel.RestClient
+import com.example.capstoneproject.View.Fragment.CategoryFragment
+import com.example.capstoneproject.View.Fragment.HomeFragment
+import com.example.capstoneproject.Model.ApiService
+import com.example.capstoneproject.Model.RestClient
+import com.example.capstoneproject.Model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,25 +26,26 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         //fragment home
-        val homeFragment=HomeFragment()
+        val homeFragment= HomeFragment()
         val manager=supportFragmentManager
         val transaction=manager.beginTransaction()
         transaction.replace(R.id.fragment_container,homeFragment)
         transaction.addToBackStack(null)
         transaction.commit()
+
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
-        var call=service.allCategory
+        var call=service.allUser
 
         //Execute the request asynchronously.
-        call.enqueue(object : Callback<List<Category>> {
+        call.enqueue(object : Callback<List<User>> {
             //Handle successfully response
             override
-            fun onResponse(call: Call<List<Category>>, response: Response<List<Category>>) {
-
+            fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+//                Toast.makeText(this@MainActivity, "OK", Toast.LENGTH_SHORT).show()
             }
             //Handle failure
             override
-            fun onFailure(call: Call<List<Category>>, throwable: Throwable) {
+            fun onFailure(call: Call<List<User>>, throwable: Throwable) {
                 Toast.makeText(this@MainActivity, "Unable to load users", Toast.LENGTH_SHORT).show()
             }
         })
@@ -59,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun callFragmentAction(action:String){
-        val categoryFragment=CategoryFragment()
+        val categoryFragment= CategoryFragment()
         val manager=supportFragmentManager
         val transaction = manager.beginTransaction()
         //
@@ -82,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.homeMenu -> {
-                val homeFragment=HomeFragment()
+                val homeFragment= HomeFragment()
                 val manager=supportFragmentManager
                 val transaction=manager.beginTransaction()
                 transaction.replace(R.id.fragment_container,homeFragment)
@@ -91,14 +95,8 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.myProfile -> {
-                val categoryFragment=CategoryFragment()
-                val manager=supportFragmentManager
-                val transaction = manager.beginTransaction()
-                // Replace the fragment on container
-                transaction.replace(R.id.fragment_container,categoryFragment)
-                transaction.addToBackStack(null)
-                // Finishing the transition
-                transaction.commit()
+                var intentQuiz= Intent(this,QuizActivity::class.java)
+                startActivity(intentQuiz)
                 return true
             }
         }

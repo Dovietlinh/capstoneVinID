@@ -1,4 +1,4 @@
-package com.example.capstoneproject.View
+package com.example.capstoneproject.View.Fragment
 
 import android.content.Context
 import android.os.Bundle
