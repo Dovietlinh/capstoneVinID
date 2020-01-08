@@ -21,7 +21,7 @@ interface ApiService {
         @Path("id") id: Int
     ): Call<User>
 
-    @POST("user")
+    @POST("user/login")
     @Headers("Content-Type: application/json")
     fun checkLogin(
         @Body user: User

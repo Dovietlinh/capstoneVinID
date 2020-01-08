@@ -48,7 +48,6 @@ class Login : AppCompatActivity() {
         var userLogin = User()
         userLogin.password=pass
         userLogin.userName=user
-
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
         var test=service.checkLogin(userLogin)
         test.enqueue(object : Callback<User> {
