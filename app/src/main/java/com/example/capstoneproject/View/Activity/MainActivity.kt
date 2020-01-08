@@ -6,17 +6,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import com.example.capstoneproject.Model.Category
+import com.example.capstoneproject.Model.User
 import com.example.capstoneproject.R
 import com.example.capstoneproject.View.Fragment.CategoryFragment
 import com.example.capstoneproject.View.Fragment.HomeFragment
-import com.example.capstoneproject.Model.ApiService
-import com.example.capstoneproject.Model.RestClient
-import com.example.capstoneproject.Model.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.capstoneproject.View.Fragment.ProfileFragment
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,23 +33,6 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment_container,homeFragment)
         transaction.addToBackStack(null)
         transaction.commit()
-
-        val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
-        var call=service.allUser
-
-        //Execute the request asynchronously.
-        call.enqueue(object : Callback<List<User>> {
-            //Handle successfully response
-            override
-            fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-//                Toast.makeText(this@MainActivity, "OK", Toast.LENGTH_SHORT).show()
-            }
-            //Handle failure
-            override
-            fun onFailure(call: Call<List<User>>, throwable: Throwable) {
-                Toast.makeText(this@MainActivity, "Unable to load users", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
     fun actionOnThi(view: View) {
         callFragmentAction("onThi")
@@ -61,6 +45,9 @@ class MainActivity : AppCompatActivity() {
     }
     fun actionLichSu(view: View) {
 
+    }
+    fun logout(view:View){
+        startActivity(Intent(this@MainActivity,Login::class.java))
     }
     fun callFragmentAction(action:String){
         val categoryFragment= CategoryFragment()
@@ -95,8 +82,17 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.myProfile -> {
-                var intentQuiz= Intent(this,QuizActivity::class.java)
-                startActivity(intentQuiz)
+                val userLogin = intent.getIntExtra("userID",0)
+                val b = Bundle()
+                b.putInt("userID", userLogin)
+
+                val profileFragment= ProfileFragment()
+//                profileFragment.arguments(b)
+                val manager=supportFragmentManager
+                val transaction=manager.beginTransaction()
+                transaction.replace(R.id.fragment_container,profileFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
                 return true
             }
         }

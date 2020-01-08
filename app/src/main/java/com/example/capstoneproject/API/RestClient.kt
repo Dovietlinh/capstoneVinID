@@ -1,4 +1,4 @@
-package com.example.capstoneproject.Model
+package com.example.capstoneproject.API
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

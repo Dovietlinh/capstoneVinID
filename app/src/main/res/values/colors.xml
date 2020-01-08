@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="topBar">#C0C0C0</color>
+    <color name="backgroudAvatar">#26a69a</color>
 </resources>

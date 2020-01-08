@@ -15,8 +15,14 @@ class User {
     @SerializedName("phone")
     var phone: String? = null
 
+    @SerializedName("passWorld")
+    var password: String? = null
+
     @SerializedName("role")
     var role: String? = null
+
+    @SerializedName("userName")
+    var userName: String? = null
 
     @SerializedName("active")
     var active: Boolean? = null

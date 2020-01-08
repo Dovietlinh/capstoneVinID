@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.Model.Category
 import com.example.capstoneproject.R
 import com.example.capstoneproject.View.Adapter.AdapterExam
-import com.example.capstoneproject.Model.ApiService
-import com.example.capstoneproject.Model.RestClient
+import com.example.capstoneproject.API.ApiService
+import com.example.capstoneproject.API.RestClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
