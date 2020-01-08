@@ -9,9 +9,9 @@ App dành cho học sinh:
 - Xem lịch sử bài thi
 
 Các công cụ được sử dụng của project:
--Version control: git
--Database: mysql
--BackEnd: Java Spring
--IDE : Intellij & Android Studio
--Testing: Postman
--FrontEnd: Android, Angular
+- Version control: git
+- Database: mysql
+- BackEnd: Java Spring
+- IDE : Intellij & Android Studio
+- Testing: Postman
+- FrontEnd: Android, Angular
