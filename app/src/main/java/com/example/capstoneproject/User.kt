@@ -1,4 +1,4 @@
-package com.example.capstoneproject.Model
+package com.example.capstoneproject
 
 import com.google.gson.annotations.SerializedName
 

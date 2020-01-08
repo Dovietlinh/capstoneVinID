@@ -6,17 +6,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.example.capstoneproject.Model.User
 import com.example.capstoneproject.R
 import com.example.capstoneproject.View.Fragment.CategoryFragment
 import com.example.capstoneproject.View.Fragment.HomeFragment
 import com.example.capstoneproject.View.Fragment.ProfileFragment
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -85,9 +78,8 @@ class MainActivity : AppCompatActivity() {
                 val userLogin = intent.getIntExtra("userID",0)
                 val b = Bundle()
                 b.putInt("userID", userLogin)
-
                 val profileFragment= ProfileFragment()
-//                profileFragment.arguments(b)
+                profileFragment.setArguments(b)
                 val manager=supportFragmentManager
                 val transaction=manager.beginTransaction()
                 transaction.replace(R.id.fragment_container,profileFragment)

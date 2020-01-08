@@ -7,16 +7,12 @@ import android.view.View
 import android.widget.TextView
 import com.example.capstoneproject.API.ApiService
 import com.example.capstoneproject.API.RestClient
-import com.example.capstoneproject.Model.User
+import com.example.capstoneproject.User
 import com.example.capstoneproject.R
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.fragment_fragment_register.*
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.Serializable
 
 
 class Login : AppCompatActivity() {
@@ -25,16 +21,6 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
-        var test=service.detailUser(1)
-        test.enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                var test="ok"
-            }
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                var tt = t
-            }
-        })
         init()
     }
     fun init(){

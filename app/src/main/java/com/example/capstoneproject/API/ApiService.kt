@@ -1,7 +1,6 @@
 package com.example.capstoneproject.API
-import android.database.Observable
 import com.example.capstoneproject.Model.Category
-import com.example.capstoneproject.Model.User
+import com.example.capstoneproject.User
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*

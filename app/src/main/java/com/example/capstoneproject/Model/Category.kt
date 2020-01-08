@@ -6,5 +6,7 @@ class Category(
     @SerializedName("id")
     var id: Int?=null,
     @SerializedName("name")
-    var categoryName: String?
+    var categoryName: String?,
+    @SerializedName("active")
+    var active: Boolean?
 )
