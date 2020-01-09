@@ -1,104 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinateBottomSheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".View.Activity.TestActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/topBar" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:text="Question: Communist countries worked on the premise that economic well-being could be best attained by"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="20dp">
-
-        <RadioButton
-            android:id="@+id/chooseA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:checked="false"
-            android:textSize="20dp"
-            android:text="A market economy." />
-
-        <RadioButton
-            android:id="@+id/chooseB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:checked="false"
-            android:textSize="20dp"
-            android:text="A strong reliance on prices and individuals' self-interests." />
-
-        <RadioButton
-            android:id="@+id/chooseC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:checked="false"
-            android:textSize="20dp"
-            android:text="A system of large privately-owned firms." />
-
-        <RadioButton
-            android:id="@+id/chooseD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_margin="10dp"
-            android:checked="false"
-            android:text="The actions of government central planners." />
-    </RadioGroup>
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <!--        <androidx.appcompat.widget.Toolbar-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@color/colorPrimary"-->
+        <!--            app:title="BottomSheet Demo"-->
+        <!--            app:titleTextColor="@android:color/white" />-->
         <TextView
-            android:layout_width="135dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Previous"
-            android:textSize="25dp" />
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Question 1: Communist countries worked on the premise that economic well-being could be best attained by"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="135dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="1/10"
-            android:textAlignment="center"
-            android:textSize="30dp" />
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
-        <TextView
-            android:layout_width="135dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Next"
-            android:textSize="25dp" />
+            <RadioButton
+                android:id="@+id/chooseA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="A market economy."
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:id="@+id/chooseB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="A strong reliance on prices and individuals' self-interests."
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:id="@+id/chooseC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="A system of large privately-owned firms."
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:id="@+id/chooseD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="The actions of government central planners."
+                android:textSize="20dp" />
+        </RadioGroup>
+
+        <!--        <Button-->
+        <!--            android:id="@+id/buttonBottomSheetDialog"-->
+        <!--            android:layout_width="100dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+        <!--            android:background="@drawable/btn_custom"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="Next" />-->
+
+        <GridLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:columnCount="3"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Previous"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/buttonBottomSheetDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="1/10"
+                android:textAlignment="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Next"
+                android:textSize="25dp" />
+        </GridLayout>
+
+        <Button
+            android:id="@+id/buttonSlideUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="10dp"
+            android:text="Slide Up"
+            android:visibility="gone" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="BottomSheet Dialog"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/buttonBottomSheetDialogFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="BottomSheet Dialog Fragment"
+            android:visibility="gone" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include layout="@layout/bottom_sheet" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

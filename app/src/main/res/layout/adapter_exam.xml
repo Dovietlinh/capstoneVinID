@@ -10,9 +10,10 @@
         android:id="@+id/idExam"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="1"
-        android:textSize="30dp"
+        android:text="Exam 1"
+        android:textSize="20dp"
+        android:textColor="@color/topBar"
         android:gravity="center"
-        android:background="@color/colorPrimary"/>
+        android:background="@drawable/custom_exam_bolder"/>
 
 </LinearLayout>

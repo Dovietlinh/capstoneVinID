@@ -38,12 +38,12 @@ class AdapterCategory(private val dataList: List<Category>,private val context:C
         holder.textCategory.text = dataList[position].categoryName
         holder.textCategory.setOnClickListener{
             if(typeTest==1){
+
+            }else if(typeTest==2){
                 val listExamFragment= ListExamFragment()
                 val transaction=(context as AppCompatActivity).supportFragmentManager.beginTransaction()
                 transaction.replace(com.example.capstoneproject.R.id.fragment_container, listExamFragment)
                 transaction.commit()
-            }else if(typeTest==2){
-
             }else if(typeTest==3){
 
             }

@@ -3,12 +3,16 @@ package com.example.capstoneproject.View.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.example.capstoneproject.API.ApiService
 import com.example.capstoneproject.API.RestClient
 import com.example.capstoneproject.User
 import com.example.capstoneproject.R
+import com.example.capstoneproject.View.Fragment.HomeFragment
+import com.example.capstoneproject.View.Fragment.ProfileFragment
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback

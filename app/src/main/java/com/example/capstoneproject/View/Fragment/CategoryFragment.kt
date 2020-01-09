@@ -34,16 +34,15 @@ class CategoryFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val valueAction = this.arguments!!.getString("action")
-        Toast.makeText(context, valueAction, Toast.LENGTH_SHORT).show()
         val view = inflater!!.inflate(R.layout.layout_category_fragment,container,false)
 
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
         var call=service.allCategory
         if(valueAction.equals("onThi")){
             typeTest=1
-        }else if(valueAction.equals("thiThat")){
-            typeTest=2
         }else if(valueAction.equals("thiThu")){
+            typeTest=2
+        }else if(valueAction.equals("thiThat")){
             typeTest=3
         }else{
             typeTest=4

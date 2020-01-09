@@ -36,7 +36,7 @@ class AdapterExam(private val dataList: List<Category>, private val context: Con
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.textCategory.text = dataList[position].id.toString()
+        holder.textCategory.text ="Exam "+ dataList[position].id.toString()
         holder.textCategory.setOnClickListener{
 //            Toast.makeText(context, dataList[position].id.toString(), Toast.LENGTH_SHORT).show()
             var intentQuiz= Intent(context,TestActivity::class.java)

@@ -26,7 +26,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:src="@mipmap/ic_avatar" />
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/username_user"
@@ -209,16 +209,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Logout"/>
-            <Button
-                android:layout_marginLeft="20dp"
-                android:textColor="#fff"
-                android:background="@drawable/btn_custom"
-                android:layout_marginTop="35dp"
-                android:onClick="logout"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"/>
+<!--            <Button-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:textColor="#fff"-->
+<!--                android:background="@drawable/btn_custom"-->
+<!--                android:layout_marginTop="35dp"-->
+<!--                android:onClick="logout"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Edit"/>-->
         </LinearLayout>
     </LinearLayout>
 

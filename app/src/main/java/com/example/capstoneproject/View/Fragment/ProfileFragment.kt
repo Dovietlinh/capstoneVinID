@@ -32,7 +32,6 @@ class ProfileFragment : Fragment(){
         test.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 var user=response.body() as User
-
                 binding?.setUser(user)
             }
             override fun onFailure(call: Call<User>, t: Throwable) {
