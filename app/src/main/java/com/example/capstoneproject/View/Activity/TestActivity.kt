@@ -1,17 +1,24 @@
 package com.example.capstoneproject.View.Activity
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.capstoneproject.Base.BaseActivity
 import com.example.capstoneproject.R
-import com.example.capstoneproject.View.Fragment.BottomSheetFragment
+import com.example.capstoneproject.View.Fragment.HomeFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
+import android.os.CountDownTimer
+import android.view.LayoutInflater
+import android.view.ViewGroup
+
+import androidx.appcompat.app.AlertDialog
 
 
 class TestActivity : BaseActivity(), View.OnClickListener {
@@ -21,25 +28,13 @@ class TestActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
+        setSupportActionBar(findViewById(R.id.toolbarExam))
         initView()
     }
 
     private fun initView() {
-        buttonSlideUp.setOnClickListener(this)
+        coundown(10000)
         buttonBottomSheetDialog.setOnClickListener(this)
-        buttonBottomSheetDialogFragment.setOnClickListener(this)
-        textViewFacebook.setOnClickListener {
-            Toast.makeText(this,"Facebook",Toast.LENGTH_SHORT).show()
-        }
-        textViewTwitter.setOnClickListener {
-            Toast.makeText(this,"Twitter",Toast.LENGTH_SHORT).show()
-        }
-        textViewInstagram.setOnClickListener {
-            Toast.makeText(this,"Instagram",Toast.LENGTH_SHORT).show()
-        }
-        textViewLinkedin.setOnClickListener {
-            Toast.makeText(this,"Linkedin",Toast.LENGTH_SHORT).show()
-        }
         bottomSheetBehavior = BottomSheetBehavior.from<ConstraintLayout>(bottomSheet)
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -69,25 +64,9 @@ class TestActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(clickView: View?) {
         when (clickView) {
-            buttonSlideUp -> {
-                slideUpDownBottomSheet()
-            }
-            buttonBottomSheetDialogFragment -> {
-                showBottomSheetDialogFragment()
-            }
             buttonBottomSheetDialog -> {
                 showBottomSheetDialog()
             }
-        }
-    }
-
-    private fun slideUpDownBottomSheet() {
-        if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            buttonSlideUp.text = "Slide Down"
-        } else {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED;
-            buttonSlideUp.text = "Slide Up"
         }
     }
 
@@ -96,7 +75,6 @@ class TestActivity : BaseActivity(), View.OnClickListener {
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(view)
         view.textViewFacebook.setOnClickListener {
-            Toast.makeText(this, "Facebook", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
         view.textViewTwitter.setOnClickListener {
@@ -110,9 +88,56 @@ class TestActivity : BaseActivity(), View.OnClickListener {
         }
         dialog.show()
     }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.top_bar_exam, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.finish -> {
+                val homeFragment= HomeFragment()
+                val manager=supportFragmentManager
+                val transaction=manager.beginTransaction()
+                transaction.replace(R.id.fragment_container,homeFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+                return true
+            }
+            R.id.lamlai->{
+                val intent = intent
+                finish()
+                startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    private fun coundown(timeCountDown: Long){
+        object : CountDownTimer(timeCountDown, 1000) {
 
-    private fun showBottomSheetDialogFragment() {
-        val bottomSheetFragment = BottomSheetFragment()
-        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            override fun onTick(millisUntilFinished: Long) {
+                txtTimer.setText(""+millisUntilFinished / 1000)
+            }
+
+            override fun onFinish() {
+                txtTimer.setText("Done!")
+                showCustomDialog()
+            }
+
+        }.start()
+    }
+    private fun showCustomDialog() {
+        //before inflating the custom alert dialog layout, we will get the current activity viewgroup
+        val viewGroup = findViewById<ViewGroup>(android.R.id.content)
+        //then we will inflate the custom alert dialog xml that we created
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_success, viewGroup, false)
+        //Now we need an AlertDialog.Builder object
+        val builder = AlertDialog.Builder(this)
+        //setting the view of the builder to our custom view that we already inflated
+        builder.setView(dialogView)
+        //finally creating the alert dialog and displaying it
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 }
