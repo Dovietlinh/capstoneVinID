@@ -1,5 +1,6 @@
 package com.example.capstoneproject.API
 import com.example.capstoneproject.Model.Category
+import com.example.capstoneproject.Model.Question
 import com.example.capstoneproject.User
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -10,6 +11,12 @@ interface ApiService {
     @get:GET("category/getAll")
     // Wrap the response in a Call with the type of the expected result
     val allCategory: Call<List<Category>>
+
+    @GET("category/getQuestion/{id}")
+    // Wrap the response in a Call with the type of the expected result
+    fun allQuestionByCategory(
+        @Path("id") id: Int
+    ): Call<List<Question>>
 
     @get:GET("user/getAll")
     // Wrap the response in a Call with the type of the expected result

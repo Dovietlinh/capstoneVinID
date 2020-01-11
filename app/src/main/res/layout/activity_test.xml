@@ -31,6 +31,7 @@
                 android:layout_margin="20dp"
                 android:text="Question 1: Communist countries worked on the premise that economic well-being could be best attained by"
                 android:textSize="20dp"
+                android:textColor="#000000"
                 android:textStyle="bold" />
 
             <View
@@ -104,6 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
+            android:background="@color/topBar"
             android:columnCount="3"
             android:orientation="horizontal">
 
@@ -120,14 +122,17 @@
                 android:id="@+id/txtTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
                 android:layout_columnWeight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="00:00s"
+                android:text="00:00"
                 android:textAlignment="center"
-                android:textColor="#66CC66"
-                android:textSize="30dp"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/buttonBottomSheetDialog"
                 android:layout_width="wrap_content"
@@ -137,9 +142,9 @@
                 android:gravity="center"
                 android:text="05/10"
                 android:textAlignment="center"
-                android:textColor="#66CC66"
+                android:textColor="#FFFFFF"
 
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -148,9 +153,9 @@
                 android:layout_columnWeight="1"
                 android:layout_gravity="center"
                 android:text="Next"
-                android:textColor="@color/topBar"
+                android:textColor="#FFFFFF"
                 android:gravity="center"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
         </GridLayout>
 
         <Button
@@ -180,7 +185,6 @@
             android:text="BottomSheet Dialog Fragment"
             android:visibility="gone" />
     </RelativeLayout>
-
 
     <include layout="@layout/bottom_sheet" />
 

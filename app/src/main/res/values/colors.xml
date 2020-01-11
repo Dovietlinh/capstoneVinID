@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="topBar">#33CC33</color>
     <color name="backgroudAvatar">#66CC66</color>
+    <color name="textColor">#00CC00</color>
 </resources>

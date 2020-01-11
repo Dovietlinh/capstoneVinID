@@ -17,25 +17,65 @@ import kotlinx.android.synthetic.main.bottom_sheet.view.*
 import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.capstoneproject.API.ApiService
+import com.example.capstoneproject.API.RestClient
+import com.example.capstoneproject.Model.Category
+import com.example.capstoneproject.View.Adapter.AdapterExam
+import com.example.capstoneproject.View.Adapter.AdapterQuestion
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class TestActivity : BaseActivity(), View.OnClickListener {
 
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    private var adapterQuestion: AdapterQuestion? = null
+    private var myRecyclerView: RecyclerView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
         setSupportActionBar(findViewById(R.id.toolbarExam))
         initView()
-    }
 
+        val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
+        var call=service.allCategory
+        //Execute the request asynchronously.
+        call.enqueue(object : Callback<List<Category>> {
+            //Handle successfully response
+            override
+            fun onResponse(call: Call<List<Category>>, response: Response<List<Category>>) {
+                loadDataList(response.body())
+            }
+            //Handle failure
+            override
+            fun onFailure(call: Call<List<Category>>, throwable: Throwable) {
+
+            }
+        })
+    }
+    private fun loadDataList(categoryList: List<Category>?) {
+        myRecyclerView = findViewById(R.id.recyclerListQuestion)
+        adapterQuestion = AdapterQuestion(
+            categoryList!!,
+            this@TestActivity
+        )
+        val numberOfCollumn=6
+
+        val layoutManager = GridLayoutManager(this@TestActivity,numberOfCollumn)
+        myRecyclerView!!.layoutManager = layoutManager
+        myRecyclerView!!.adapter = adapterQuestion
+    }
     private fun initView() {
         coundown(10000)
         buttonBottomSheetDialog.setOnClickListener(this)
-        bottomSheetBehavior = BottomSheetBehavior.from<ConstraintLayout>(bottomSheet)
+        bottomSheetBehavior = BottomSheetBehavior.from<LinearLayout>(bottomSheet)
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
@@ -67,6 +107,9 @@ class TestActivity : BaseActivity(), View.OnClickListener {
             buttonBottomSheetDialog -> {
                 showBottomSheetDialog()
             }
+            hidenBottomSheet -> {
+                bottomSheetBehavior.isHideable
+            }
         }
     }
 
@@ -74,18 +117,18 @@ class TestActivity : BaseActivity(), View.OnClickListener {
         val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(view)
-        view.textViewFacebook.setOnClickListener {
-            dialog.dismiss()
-        }
-        view.textViewTwitter.setOnClickListener {
-            Toast.makeText(this, "Twitter", Toast.LENGTH_SHORT).show()
-        }
-        view.textViewInstagram.setOnClickListener {
-            Toast.makeText(this, "Instagram", Toast.LENGTH_SHORT).show()
-        }
-        view.textViewLinkedin.setOnClickListener {
-            Toast.makeText(this, "Linkedin", Toast.LENGTH_SHORT).show()
-        }
+//        view.textViewFacebook.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//        view.textViewTwitter.setOnClickListener {
+//            Toast.makeText(this, "Twitter", Toast.LENGTH_SHORT).show()
+//        }
+//        view.textViewInstagram.setOnClickListener {
+//            Toast.makeText(this, "Instagram", Toast.LENGTH_SHORT).show()
+//        }
+//        view.textViewLinkedin.setOnClickListener {
+//            Toast.makeText(this, "Linkedin", Toast.LENGTH_SHORT).show()
+//        }
         dialog.show()
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
