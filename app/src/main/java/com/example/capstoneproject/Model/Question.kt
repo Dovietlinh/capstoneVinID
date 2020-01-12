@@ -1,6 +1,8 @@
 package com.example.capstoneproject.Model
 
-open class Question {
+import java.io.Serializable
+
+open class Question :Serializable{
     var id: Int? = null
     var content: String = ""
     var description: String =""
@@ -9,7 +11,8 @@ open class Question {
     var difficultID: Int? = null
     var examID: Int? = null
     var answerID: Int? =null
-    var listAnswer:List<Answer>?=null
+    var answerList:List<Answer>?=null
+    var correctAnswer:Answer?=null
 
     constructor(
         id: Int,
@@ -20,7 +23,8 @@ open class Question {
         difficultID: Int,
         examID: Int,
         answerID:Int,
-        listAnswer: List<Answer>
+        answerList: List<Answer>,
+        correctAnswer: Answer
     ){
         this.id = id
         this.content = content
@@ -30,6 +34,7 @@ open class Question {
         this.difficultID = difficultID
         this.examID = examID
         this.answerID=answerID
-        this.listAnswer=listAnswer
+        this.answerList=answerList
+        this.correctAnswer=correctAnswer
     }
 }

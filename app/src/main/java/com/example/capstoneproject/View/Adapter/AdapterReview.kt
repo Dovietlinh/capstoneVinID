@@ -40,15 +40,9 @@ class AdapterReview(private val dataList: List<Question>, private val context: C
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.textQuestion.text ="Question "+(position+1)+": "+ dataList[position].content
-        val listAnswer=dataList[position].listAnswer
-        var answer=dataList[position].content
-//        listAnswer!!.forEach {
-//            if(it.id==dataList[position].id){
-//                answer=it.content
-//            }
-//        }
-        holder.textAnswer.text ="Answer: "+ answer
-        holder.textExplain.text ="Explain: "+ dataList[position].content
+        val answerCorrect=dataList[position].correctAnswer?.content
+        holder.textAnswer.text ="Answer: "+ answerCorrect
+        holder.textExplain.text ="Explain: "+ dataList[position].description
 //        holder.textCategory.setOnClickListener{
 //            //            Toast.makeText(context, dataList[position].id.toString(), Toast.LENGTH_SHORT).show()
 //            var intentQuiz= Intent(context,TestActivity::class.java)

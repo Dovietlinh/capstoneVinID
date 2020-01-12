@@ -8,9 +8,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.Model.Category
+import com.example.capstoneproject.Model.Question
 import com.example.capstoneproject.R
 
-class AdapterQuestion (private val dataList: List<Category>, private val context: Context):
+class AdapterQuestion (private val dataList: List<Int>, private val context: Context):
     RecyclerView.Adapter<AdapterQuestion.CustomViewHolder>() {
     inner class CustomViewHolder(
         //Get a reference to the Views in our layout
@@ -32,9 +33,9 @@ class AdapterQuestion (private val dataList: List<Category>, private val context
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.textQuestion.text =dataList[position].id.toString()
+        holder.textQuestion.text =dataList[position].toString()
         holder.textQuestion.setOnClickListener{
-               Toast.makeText(context, dataList[position].id.toString(), Toast.LENGTH_SHORT).show()
+               Toast.makeText(context, dataList[position], Toast.LENGTH_SHORT).show()
 
         }
     }

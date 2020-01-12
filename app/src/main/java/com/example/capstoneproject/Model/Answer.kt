@@ -1,6 +1,8 @@
 package com.example.capstoneproject.Model
 
-open class Answer {
+import java.io.Serializable
+
+open class Answer:Serializable{
     var id: Int? = null
     var content: String = ""
     constructor(

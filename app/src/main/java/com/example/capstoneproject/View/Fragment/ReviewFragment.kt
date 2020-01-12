@@ -5,21 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.API.ApiService
 import com.example.capstoneproject.API.RestClient
-import com.example.capstoneproject.Model.Category
 import com.example.capstoneproject.Model.Question
 import com.example.capstoneproject.R
-import com.example.capstoneproject.User
-import com.example.capstoneproject.View.Adapter.AdapterExam
+import com.example.capstoneproject.View.Activity.MainActivity
 import com.example.capstoneproject.View.Adapter.AdapterReview
-import com.example.capstoneproject.databinding.ProfileFragmentBinding
+import com.example.capstoneproject.View.Dialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,12 +31,18 @@ class ReviewFragment : Fragment(){
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
         val categoryID = this.arguments!!.getInt("categoryID")
         var call=service.allQuestionByCategory(categoryID)
+        var dialog= Dialog()
         //Execute the request asynchronously.
         call.enqueue(object : Callback<List<Question>> {
             //Handle successfully response
             override
             fun onResponse(call: Call<List<Question>>, response: Response<List<Question>>) {
-                loadDataList(response.body())
+                if(response.body()!=null){
+//                    val layout:Int=R.layout.dialog_success
+//                    dialog.showCustomDialog(container,context,layout)
+//                }else {
+                    loadDataList(response.body())
+                }
             }
             //Handle failure
             override

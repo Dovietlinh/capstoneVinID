@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.capstoneproject.Base.BaseActivity
 import com.example.capstoneproject.R
 import com.example.capstoneproject.View.Fragment.HomeFragment
@@ -13,24 +11,16 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlinx.android.synthetic.main.bottom_sheet.*
-import kotlinx.android.synthetic.main.bottom_sheet.view.*
 import android.os.CountDownTimer
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-
-import androidx.appcompat.app.AlertDialog
+import android.widget.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.capstoneproject.API.ApiService
-import com.example.capstoneproject.API.RestClient
-import com.example.capstoneproject.Model.Category
-import com.example.capstoneproject.View.Adapter.AdapterExam
+import com.example.capstoneproject.Model.Answer
+import com.example.capstoneproject.Model.AnswerUser
+import com.example.capstoneproject.Model.Question
 import com.example.capstoneproject.View.Adapter.AdapterQuestion
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.capstoneproject.View.Dialog
 
 
 class TestActivity : BaseActivity(), View.OnClickListener {
@@ -38,48 +28,89 @@ class TestActivity : BaseActivity(), View.OnClickListener {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private var adapterQuestion: AdapterQuestion? = null
     private var myRecyclerView: RecyclerView? = null
+    private var txtQuestion: TextView? = null
+    private var txtIndexQuestion: TextView? = null
+    private var rdA:RadioButton?=null
+    private var rdB:RadioButton?=null
+    private var rdC:RadioButton?=null
+    private var rdD:RadioButton?=null
+    private var dialog = Dialog()
+    private var indexQuestion=0
+    lateinit var listQuestion:List<Question>
+    var listAnswerUser: MutableList<AnswerUser> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
         setSupportActionBar(findViewById(R.id.toolbarExam))
         initView()
-
-        val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
-        var call=service.allCategory
-        //Execute the request asynchronously.
-        call.enqueue(object : Callback<List<Category>> {
-            //Handle successfully response
-            override
-            fun onResponse(call: Call<List<Category>>, response: Response<List<Category>>) {
-                loadDataList(response.body())
+        val idExam = intent.getIntExtra("idExam", -1)
+        loadQuestion(listQuestion[indexQuestion], indexQuestion+1)
+        var list: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        loadDataList(list)
+        val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
+        radioGroup?.setOnCheckedChangeListener { group, checkedId ->
+            val answerID=listQuestion[indexQuestion].answerList as List<Answer>
+            if (R.id.chooseA == checkedId){
+                listAnswerUser[indexQuestion].answerID=answerID[0].id
             }
-            //Handle failure
-            override
-            fun onFailure(call: Call<List<Category>>, throwable: Throwable) {
-
+            else if (R.id.chooseB == checkedId){
+                listAnswerUser[indexQuestion].answerID=answerID[1].id
             }
-        })
+            else if (R.id.chooseC == checkedId){
+                listAnswerUser[indexQuestion].answerID=answerID[2].id
+            }
+            else{
+                listAnswerUser[indexQuestion].answerID=answerID[3].id
+            }
+        }
+
     }
-    private fun loadDataList(categoryList: List<Category>?) {
+
+    private fun loadQuestion(question: Question, index: Int) {
+        val listAnswer=question.answerList as List<Answer>
+        txtIndexQuestion!!.text=(indexQuestion+1).toString()+"/"+listQuestion.size
+        txtQuestion!!.text = "Question " + index + " :" + question.content
+        rdA!!.text = listAnswer[0].content
+        rdC!!.isChecked
+        rdB!!.text = listAnswer[1].content
+        rdC!!.text = listAnswer[2].content
+        rdD!!.text = listAnswer[3].content
+    }
+
+    private fun loadDataList(questionList: List<Int>?) {
         myRecyclerView = findViewById(R.id.recyclerListQuestion)
         adapterQuestion = AdapterQuestion(
-            categoryList!!,
+            questionList!!,
             this@TestActivity
         )
-        val numberOfCollumn=6
+        val numberOfCollumn = 3
 
-        val layoutManager = GridLayoutManager(this@TestActivity,numberOfCollumn)
+        val layoutManager = GridLayoutManager(this@TestActivity, numberOfCollumn)
         myRecyclerView!!.layoutManager = layoutManager
         myRecyclerView!!.adapter = adapterQuestion
     }
+
     private fun initView() {
+        txtQuestion = this.findViewById(R.id.txtQuestion)
+        listQuestion = intent.getSerializableExtra("listQuestion") as List<Question>
+        for(it in listQuestion){
+            val answerUser=AnswerUser(it.id as Int,-1,-1)
+            listAnswerUser!!.add(answerUser)
+        }
+        rdA = this.findViewById(R.id.chooseA)
+        rdB = this.findViewById(R.id.chooseB)
+        rdC = this.findViewById(R.id.chooseC)
+        rdD = this.findViewById(R.id.chooseD)
+        txtIndexQuestion=this.findViewById(R.id.buttonBottomSheetDialog)
         coundown(10000)
         buttonBottomSheetDialog.setOnClickListener(this)
         bottomSheetBehavior = BottomSheetBehavior.from<LinearLayout>(bottomSheet)
-        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.setBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
             }
+
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_COLLAPSED -> {
@@ -112,6 +143,20 @@ class TestActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
+    fun nextQ(view: View) {
+        indexQuestion++
+        if(indexQuestion>=listQuestion.size){
+            indexQuestion=0
+        }
+        txtIndexQuestion!!.text=(indexQuestion+1).toString()+"/"+listQuestion.size
+//        loadQuestion(listQuestion[indexQuestion],indexQuestion+1)
+        val listAnswer=listQuestion[indexQuestion].answerList as List<Answer>
+        txtQuestion!!.text = "Question " + (indexQuestion+1) + " :" + listQuestion[indexQuestion].content
+        rdA!!.text = listAnswer[0].content
+        rdB!!.text = listAnswer[1].content
+        rdC!!.text = listAnswer[2].content
+//        rdD!!.text = listAnswer[3].content
+    }
 
     private fun showBottomSheetDialog() {
         val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
@@ -120,34 +165,27 @@ class TestActivity : BaseActivity(), View.OnClickListener {
 //        view.textViewFacebook.setOnClickListener {
 //            dialog.dismiss()
 //        }
-//        view.textViewTwitter.setOnClickListener {
-//            Toast.makeText(this, "Twitter", Toast.LENGTH_SHORT).show()
-//        }
-//        view.textViewInstagram.setOnClickListener {
-//            Toast.makeText(this, "Instagram", Toast.LENGTH_SHORT).show()
-//        }
-//        view.textViewLinkedin.setOnClickListener {
-//            Toast.makeText(this, "Linkedin", Toast.LENGTH_SHORT).show()
-//        }
         dialog.show()
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.top_bar_exam, menu)
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.finish -> {
-                val homeFragment= HomeFragment()
-                val manager=supportFragmentManager
-                val transaction=manager.beginTransaction()
-                transaction.replace(R.id.fragment_container,homeFragment)
+                val homeFragment = HomeFragment()
+                val manager = supportFragmentManager
+                val transaction = manager.beginTransaction()
+                transaction.replace(R.id.fragment_container, homeFragment)
                 transaction.addToBackStack(null)
                 transaction.commit()
                 return true
             }
-            R.id.lamlai->{
+            R.id.lamlai -> {
                 val intent = intent
                 finish()
                 startActivity(intent)
@@ -156,31 +194,23 @@ class TestActivity : BaseActivity(), View.OnClickListener {
         }
         return super.onOptionsItemSelected(item)
     }
-    private fun coundown(timeCountDown: Long){
+
+    private fun coundown(timeCountDown: Long) {
         object : CountDownTimer(timeCountDown, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
-                txtTimer.setText(""+millisUntilFinished / 1000)
+                txtTimer.setText("" + millisUntilFinished / 1000)
             }
 
             override fun onFinish() {
                 txtTimer.setText("Done!")
-                showCustomDialog()
+                val layout: Int = R.layout.dialog_success
+//                findViewById<TextView>()
+                val viewGroup = findViewById<ViewGroup>(android.R.id.content)
+                dialog.showCustomDialog(viewGroup, this@TestActivity, layout)
             }
 
         }.start()
     }
-    private fun showCustomDialog() {
-        //before inflating the custom alert dialog layout, we will get the current activity viewgroup
-        val viewGroup = findViewById<ViewGroup>(android.R.id.content)
-        //then we will inflate the custom alert dialog xml that we created
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_success, viewGroup, false)
-        //Now we need an AlertDialog.Builder object
-        val builder = AlertDialog.Builder(this)
-        //setting the view of the builder to our custom view that we already inflated
-        builder.setView(dialogView)
-        //finally creating the alert dialog and displaying it
-        val alertDialog = builder.create()
-        alertDialog.show()
-    }
+
 }
