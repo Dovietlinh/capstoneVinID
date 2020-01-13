@@ -8,7 +8,7 @@ object RestClient{
     //Define the base URL
 //    private const val BASE_URL = "https://jsonplaceholder.typicode.com"
 
-    private const val BASE_URL = "https://vinschoolexam.herokuapp.com/api/"
+    private const val BASE_URL = "https://highschoolexam.herokuapp.com/api/"
     //Create the retrofit instance to call endpoint and retrieve the list
     val retrofitInstance: Retrofit?
         get() {

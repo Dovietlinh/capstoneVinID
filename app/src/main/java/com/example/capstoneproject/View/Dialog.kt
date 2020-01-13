@@ -10,8 +10,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
+import com.example.capstoneproject.Model.RequestUser
 import com.example.capstoneproject.View.Activity.MainActivity
 import com.example.capstoneproject.View.Activity.TestActivity
 import com.example.capstoneproject.View.Fragment.ListExamFragment
@@ -26,7 +28,7 @@ open class Dialog {
         dialog.setContentView(view)
         dialog.show()
     }
-    fun showCustomDialog(viewGroup: ViewGroup?,context: Context?,layout: Int) {
+    fun showCustomDialog(viewGroup: ViewGroup?,context: Context?,layout: Int,requestUser: RequestUser) {
         //before inflating the custom alert dialog layout, we will get the current activity viewgroup
 //        val viewGroup = activity.findViewById<ViewGroup>(android.R.id.content)
 
@@ -42,6 +44,12 @@ open class Dialog {
         alertDialog.show()
         val replayExam = dialogView .findViewById(R.id.replayExam) as Button
         val finish = dialogView .findViewById(R.id.btnFinish) as Button
+        val point = dialogView .findViewById(R.id.txtPoint) as TextView
+        val numberPass = dialogView .findViewById(R.id.txtPass) as TextView
+        val numberFail = dialogView .findViewById(R.id.txtfail) as TextView
+        point.text=requestUser.point.toString()+ "POINT"
+        numberPass.text=requestUser.numberPass.toString()
+        numberFail.text=requestUser.numberFail.toString()
         finish.setOnClickListener {
             alertDialog.dismiss()
         }

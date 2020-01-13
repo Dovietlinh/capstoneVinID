@@ -1,12 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/finish"
-        android:title="Kết thúc"
-        app:showAsAction="ifRoom|withText"></item>
-    <item
         android:id="@+id/lamlai"
         android:title="Làm lại"
         android:icon="@drawable/ic_replay_black_24dp"
+        app:showAsAction="ifRoom|withText"></item>
+    <item
+        android:id="@+id/finish"
+        android:title="Kết thúc"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
         app:showAsAction="ifRoom|withText"></item>
 </menu>

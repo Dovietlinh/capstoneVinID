@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.Model.Answer
 import com.example.capstoneproject.Model.AnswerUser
 import com.example.capstoneproject.Model.Question
+import com.example.capstoneproject.Model.RequestUser
 import com.example.capstoneproject.View.Adapter.AdapterQuestion
 import com.example.capstoneproject.View.Dialog
 
@@ -37,6 +38,7 @@ class TestActivity : BaseActivity(), View.OnClickListener {
     private var dialog = Dialog()
     private var indexQuestion=0
     lateinit var listQuestion:List<Question>
+    lateinit var requestUser:RequestUser
     var listAnswerUser: MutableList<AnswerUser> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,8 @@ class TestActivity : BaseActivity(), View.OnClickListener {
         setSupportActionBar(findViewById(R.id.toolbarExam))
         initView()
         val idExam = intent.getIntExtra("idExam", -1)
+        requestUser.examID=idExam
+
         loadQuestion(listQuestion[indexQuestion], indexQuestion+1)
         var list: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         loadDataList(list)
@@ -70,8 +74,8 @@ class TestActivity : BaseActivity(), View.OnClickListener {
         val listAnswer=question.answerList as List<Answer>
         txtIndexQuestion!!.text=(indexQuestion+1).toString()+"/"+listQuestion.size
         txtQuestion!!.text = "Question " + index + " :" + question.content
+
         rdA!!.text = listAnswer[0].content
-        rdC!!.isChecked
         rdB!!.text = listAnswer[1].content
         rdC!!.text = listAnswer[2].content
         rdD!!.text = listAnswer[3].content
@@ -143,19 +147,39 @@ class TestActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
+
     fun nextQ(view: View) {
         indexQuestion++
         if(indexQuestion>=listQuestion.size){
             indexQuestion=0
         }
         txtIndexQuestion!!.text=(indexQuestion+1).toString()+"/"+listQuestion.size
-//        loadQuestion(listQuestion[indexQuestion],indexQuestion+1)
+        val checkChoose = listAnswerUser[indexQuestion].answerID
         val listAnswer=listQuestion[indexQuestion].answerList as List<Answer>
+        var choice=0
+        val size=listAnswer.size-1
+        for(i in 0 .. size step 1){
+            val a=listAnswer[i].id
+            val b=checkChoose
+            if(listAnswer[i].id==checkChoose){
+                choice=i
+                break
+            }
+        }
         txtQuestion!!.text = "Question " + (indexQuestion+1) + " :" + listQuestion[indexQuestion].content
         rdA!!.text = listAnswer[0].content
         rdB!!.text = listAnswer[1].content
         rdC!!.text = listAnswer[2].content
 //        rdD!!.text = listAnswer[3].content
+        if(choice==0){
+            rdA!!.isChecked=true
+        }else if(choice==1){
+            rdB!!.isChecked=true
+        }else if(choice==2){
+            rdC!!.isChecked=true
+        }else{
+            rdD!!.isChecked=true
+        }
     }
 
     private fun showBottomSheetDialog() {
@@ -191,6 +215,14 @@ class TestActivity : BaseActivity(), View.OnClickListener {
                 startActivity(intent)
                 return true
             }
+            R.id.finish -> {
+                requestUser.listAnswerUser=listAnswerUser
+                txtTimer.setText("Done!")
+                val layout: Int = R.layout.dialog_success
+                val viewGroup = findViewById<ViewGroup>(android.R.id.content)
+                dialog.showCustomDialog(viewGroup, this@TestActivity, layout,requestUser)
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -203,11 +235,12 @@ class TestActivity : BaseActivity(), View.OnClickListener {
             }
 
             override fun onFinish() {
+                requestUser.listAnswerUser=listAnswerUser
                 txtTimer.setText("Done!")
                 val layout: Int = R.layout.dialog_success
 //                findViewById<TextView>()
                 val viewGroup = findViewById<ViewGroup>(android.R.id.content)
-                dialog.showCustomDialog(viewGroup, this@TestActivity, layout)
+                dialog.showCustomDialog(viewGroup, this@TestActivity, layout,requestUser)
             }
 
         }.start()
