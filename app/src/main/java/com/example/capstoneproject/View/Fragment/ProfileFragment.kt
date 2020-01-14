@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -18,7 +19,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProfileFragment : Fragment(){
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,13 +29,17 @@ class ProfileFragment : Fragment(){
         val binding : ProfileFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.profile_fragment,container,false)
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
         var test=service.detailUser(valueAction)
+        val llProgressBar:LinearLayout=view.findViewById(R.id.lProgressBar)
+        llProgressBar?.visibility = View.VISIBLE
         test.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 var user=response.body() as User
                 binding?.setUser(user)
+                llProgressBar.visibility = View.GONE
             }
             override fun onFailure(call: Call<User>, t: Throwable) {
                 Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
+                llProgressBar.visibility = View.GONE
             }
         })
         return binding.root

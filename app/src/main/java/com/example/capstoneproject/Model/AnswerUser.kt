@@ -3,40 +3,40 @@ package com.example.capstoneproject.Model
 import java.io.Serializable
 
 open class AnswerUser :Serializable{
-    var questionID: Int? = null
-    var correctAnswerID: Int? = null
-    var answerID: Int? =null
+    var questionId: Int? = null
+    var correctId: Int = 0
+    var answerId: Int =0
     constructor(){
 
     }
     constructor(
-        questionID: Int,
-        answerID:Int,
-        correctAnswerID:Int
+        questionId: Int,
+        answerId:Int,
+        correctId:Int
     ){
-        this.answerID=answerID
-        this.correctAnswerID=correctAnswerID
-        this.questionID=questionID
+        this.answerId=answerId
+        this.correctId=correctId
+        this.questionId=questionId
     }
 }
 open class RequestUser:Serializable{
-    var examID:Int? =null
-    var point:Float=0.0f
-    var numberPass:Int=0
-    var numberFail:Int=0
-    var listAnswerUser:List<AnswerUser>?=null
+    var examId:Int? =null
+    var point:Float?=null
+    var numberPass:Int?=null
+    var numberFalse:Int?=null
+    var answerByUserList:List<AnswerUser>?=null
     constructor()
     constructor(
-        examID:Int,
+        examId:Int,
         point: Float,
         numberPass:Int,
-        numberFail:Int,
-        listAnswerUser: List<AnswerUser>
+        numberFalse:Int,
+        answerByUserList: List<AnswerUser>
     ){
-        this.examID=examID
+        this.examId=examId
         this.point=point
         this.numberPass=numberPass
-        this.numberFail=numberFail
-        this.listAnswerUser=listAnswerUser
+        this.numberFalse=numberFalse
+        this.answerByUserList=answerByUserList
     }
 }

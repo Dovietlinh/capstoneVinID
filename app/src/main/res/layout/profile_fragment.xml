@@ -10,7 +10,10 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical">
-
+    <include
+        android:id="@+id/lProgressBar"
+        layout="@layout/loading"
+        android:visibility="gone" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="235dp">
@@ -192,6 +195,7 @@
                 android:text="@{user.phone}"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -220,7 +224,8 @@
 <!--                android:layout_height="wrap_content"-->
 <!--                android:text="Edit"/>-->
         </LinearLayout>
-    </LinearLayout>
 
+    </LinearLayout>
 </LinearLayout>
+
 </layout>

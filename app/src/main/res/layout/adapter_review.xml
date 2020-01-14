@@ -29,18 +29,32 @@
             android:layout_marginVertical="10dp"
             android:background="#bdbdbd" />
 
+        <Button
+            android:id="@+id/showAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/btn_custom"
+            android:paddingHorizontal="10dp"
+            android:text="Show Answer"
+            android:textColor="#FFFFFF" />
+
         <TextView
             android:id="@+id/answerReview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginLeft="20dp"
             android:text="Answer: fsdfsdfsdf"
             android:textSize="18dp" />
+
         <TextView
             android:id="@+id/explainReview"
-            android:layout_marginVertical="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginVertical="10dp"
             android:layout_marginLeft="20dp"
             android:text="Explain: fasdfghjkl"
             android:textSize="18dp" />

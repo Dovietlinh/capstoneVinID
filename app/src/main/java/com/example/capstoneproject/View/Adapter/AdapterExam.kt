@@ -7,21 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.API.ApiService
 import com.example.capstoneproject.API.RestClient
-import com.example.capstoneproject.Model.Category
 import com.example.capstoneproject.Model.Question
 import com.example.capstoneproject.R
-import com.example.capstoneproject.View.Activity.QuizActivity
 import com.example.capstoneproject.View.Activity.TestActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.Serializable
 
-class AdapterExam(private val dataList: List<Category>, private val context: Context) :
+class AdapterExam(private val dataList: List<Int>, private val context: Context) :
     RecyclerView.Adapter<AdapterExam.CustomViewHolder>() {
     inner class CustomViewHolder(
         //Get a reference to the Views in our layout
@@ -43,22 +40,27 @@ class AdapterExam(private val dataList: List<Category>, private val context: Con
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.textCategory.text = "Exam " + dataList[position].id.toString()
+        holder.textCategory.text = "Exam " + (position+1)
         holder.textCategory.setOnClickListener {
 
             val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
-            var call = service.allQuestionByCategory(dataList[position].id as Int)
+            val idExam=dataList[position] as Int
+            var call = service.allQuestionByExamID(idExam)
+//            var call = service.allQuestionByCategory(dataList[position])
             //Execute the request asynchronously.
             call.enqueue(object : Callback<List<Question>> {
                 //Handle successfully response
                 override
                 fun onResponse(call: Call<List<Question>>, response: Response<List<Question>>) {
-                    //            Toast.makeText(context, dataList[position].id.toString(), Toast.LENGTH_SHORT).show()
-                    var intentQuiz = Intent(context, TestActivity::class.java)
-                    intentQuiz.putExtra("idExam", dataList[position].id)
-                    val listQuestion=response.body() as List<Question>
-                    intentQuiz.putExtra("listQuestion",listQuestion as Serializable)
-                    context.startActivity(intentQuiz)
+                    if(response.body()!=null && response.body()?.size!=0){
+                        var intentQuiz = Intent(context, TestActivity::class.java)
+                        intentQuiz.putExtra("idExam", dataList[position])
+                        val listQuestion=response.body() as List<Question>
+                        intentQuiz.putExtra("listQuestion",listQuestion as Serializable)
+                        context.startActivity(intentQuiz)
+                    }else{
+                        Toast.makeText(context,"Không có câu hỏi nào trong đề",Toast.LENGTH_LONG).show()
+                    }
                 }
                 //Handle failure
                 override

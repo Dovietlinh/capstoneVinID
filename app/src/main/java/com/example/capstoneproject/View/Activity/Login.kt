@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.capstoneproject.API.ApiService
 import com.example.capstoneproject.API.RestClient
@@ -22,6 +23,7 @@ import retrofit2.Response
 class Login : AppCompatActivity() {
     var userName: TextView?=null
     var password: TextView?=null
+    private var llProgressBar: LinearLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -30,11 +32,12 @@ class Login : AppCompatActivity() {
     fun init(){
         userName= findViewById(R.id.et_username) as TextView
         password = findViewById(R.id.et_password) as TextView
+        llProgressBar=findViewById(R.id.llProgressBar)
     }
     fun loginAction(view: View) {
         val user=userName!!.text.toString()
         val pass=password!!.text.toString()
-
+        llProgressBar?.visibility = View.VISIBLE
         var userLogin = User()
         userLogin.password=pass
         userLogin.userName=user
@@ -45,14 +48,17 @@ class Login : AppCompatActivity() {
                 var userLogin=response.body() as User
                 if(userLogin==null){
                     notification_Fail.visibility=View.VISIBLE
+
                 }else{
                     var intent=Intent(this@Login,MainActivity::class.java)
                     intent.putExtra("userID", userLogin.id)
                     startActivity(intent)
                 }
+                llProgressBar?.visibility = View.GONE
             }
             override fun onFailure(call: Call<User>, t: Throwable) {
                 notification_Fail.visibility=View.VISIBLE
+                llProgressBar?.visibility = View.GONE
             }
         })
     }

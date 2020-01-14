@@ -42,16 +42,21 @@ open class Dialog {
         //finally creating the alert dialog and displaying it
         val alertDialog = builder.create()
         alertDialog.show()
+
         val replayExam = dialogView .findViewById(R.id.replayExam) as Button
         val finish = dialogView .findViewById(R.id.btnFinish) as Button
         val point = dialogView .findViewById(R.id.txtPoint) as TextView
         val numberPass = dialogView .findViewById(R.id.txtPass) as TextView
         val numberFail = dialogView .findViewById(R.id.txtfail) as TextView
-        point.text=requestUser.point.toString()+ "POINT"
+        point.text=requestUser.point.toString()+ " POINT"
         numberPass.text=requestUser.numberPass.toString()
-        numberFail.text=requestUser.numberFail.toString()
+        numberFail.text=requestUser.numberFalse.toString()
+
         finish.setOnClickListener {
+            var gotoMain = Intent(context, MainActivity::class.java)
+            context.startActivity(gotoMain)
             alertDialog.dismiss()
+
         }
         replayExam.setOnClickListener{
             alertDialog.dismiss()

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,10 +23,8 @@ import retrofit2.Response
 class CategoryFragment: Fragment() {
     private var adapterCategory: AdapterCategory? = null
     private var myRecyclerView: RecyclerView? = null
+    private var llProgressBar: LinearLayout? = null
     private var typeTest:Int=0
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +33,8 @@ class CategoryFragment: Fragment() {
     ): View? {
         val valueAction = this.arguments!!.getString("action")
         val view = inflater!!.inflate(R.layout.layout_category_fragment,container,false)
-
+        llProgressBar=view.findViewById(R.id.llProgressBar)
+        llProgressBar?.visibility = View.VISIBLE
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
         var call=service.allCategory
         if(valueAction.equals("onThi")){
@@ -47,13 +46,14 @@ class CategoryFragment: Fragment() {
         }else{
             typeTest=4
         }
-
         //Execute the request asynchronously.
         call.enqueue(object : Callback<List<Category>> {
             //Handle successfully response
             override
             fun onResponse(call: Call<List<Category>>, response: Response<List<Category>>) {
                 loadDataList(response.body())
+                llProgressBar?.visibility=View.GONE
+
             }
             //Handle failure
             override
@@ -65,6 +65,7 @@ class CategoryFragment: Fragment() {
         // Return the fragment view/layout
         return view
     }
+
     private fun loadDataList(categoryList: List<Category>?) {
         myRecyclerView = view?.findViewById(R.id.recyclerViewCategory)
         adapterCategory = AdapterCategory(

@@ -6,10 +6,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import com.example.capstoneproject.R
 import com.example.capstoneproject.View.Fragment.CategoryFragment
 import com.example.capstoneproject.View.Fragment.HomeFragment
 import com.example.capstoneproject.View.Fragment.ProfileFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment_container,homeFragment)
         transaction.addToBackStack(null)
         transaction.commit()
+
     }
     fun actionOnThi(view: View) {
         callFragmentAction("onThi")

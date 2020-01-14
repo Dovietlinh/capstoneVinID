@@ -43,7 +43,7 @@
                 android:background="@drawable/ic_check_circle_black_24dp" />
 
             <TextView
-                android:id="@+id/txtfail"
+                android:id="@+id/txtPass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -57,7 +57,7 @@
                 android:background="@drawable/ic_cancel_black_24dp" />
 
             <TextView
-                android:id="@+id/txtPass"
+                android:id="@+id/txtfail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"

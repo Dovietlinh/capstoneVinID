@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ import retrofit2.Response
 class ReviewFragment : Fragment(){
     private var adapterReview: AdapterReview? = null
     private var myRecyclerView: RecyclerView? = null
+    private var llProgressBar: LinearLayout? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +33,8 @@ class ReviewFragment : Fragment(){
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
         val categoryID = this.arguments!!.getInt("categoryID")
         var call=service.allQuestionByCategory(categoryID)
+        llProgressBar=view.findViewById(R.id.llProgressBar)
+        llProgressBar?.visibility = View.VISIBLE
         var dialog= Dialog()
         //Execute the request asynchronously.
         call.enqueue(object : Callback<List<Question>> {
@@ -43,6 +47,7 @@ class ReviewFragment : Fragment(){
 //                }else {
                     loadDataList(response.body())
                 }
+                llProgressBar?.visibility = View.GONE
             }
             //Handle failure
             override
@@ -56,7 +61,7 @@ class ReviewFragment : Fragment(){
         myRecyclerView = view?.findViewById(R.id.recyclerListExam)
         adapterReview = AdapterReview(
             categoryList!!,
-            requireContext()
+            requireContext(),llProgressBar
         )
         val layoutManager = LinearLayoutManager(context)
         myRecyclerView!!.layoutManager = layoutManager
