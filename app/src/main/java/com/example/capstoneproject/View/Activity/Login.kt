@@ -44,7 +44,7 @@ class Login : AppCompatActivity() {
         userLogin.userName=user
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
         var test=service.checkLogin(userLogin)
-        var first = Singleton.instance  // This (Singleton@7daf6ecc) is a
+        var singleton = Singleton.instance  // This (Singleton@7daf6ecc) is a
         // singleton
         test.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -52,10 +52,10 @@ class Login : AppCompatActivity() {
                 if(userLogin==null){
                     notification_Fail.visibility=View.VISIBLE
                 }else{
-                    first.token = "hello singleton ok"
+                    singleton.userID = userLogin.id
                     var intent=Intent(this@Login,MainActivity::class.java)
                     intent.putExtra("userID", userLogin.id)
-                    intent.putExtra("token", first.token)
+                    intent.putExtra("token", singleton.token)
                     startActivity(intent)
                 }
                 llProgressBar?.visibility = View.GONE

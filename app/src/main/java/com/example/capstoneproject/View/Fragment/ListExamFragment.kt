@@ -22,6 +22,7 @@ class ListExamFragment :Fragment(){
     private var adapterExam: AdapterExam? = null
     private var myRecyclerView: RecyclerView? = null
     private var llProgressBar: LinearLayout? = null
+    private var userID:Int=0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,8 +31,9 @@ class ListExamFragment :Fragment(){
         val view = inflater!!.inflate(R.layout.list_exam_fragment,container,false)
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
         val categoryID = this.arguments!!.getInt("categoryID")
+        userID = this.arguments!!.getInt("userID")
         val mock = this.arguments!!.getInt("mock")
-        var call=service.listExamByCategoryAndMock(categoryID,mock)
+        var call=service.listExamByCategoryAndMock(categoryID,mock,userID)
         llProgressBar=view.findViewById(R.id.llProgressBar)
         llProgressBar?.visibility = View.VISIBLE
         //Execute the request asynchronously.
@@ -56,7 +58,7 @@ class ListExamFragment :Fragment(){
         myRecyclerView = view?.findViewById(R.id.recyclerListExam)
         adapterExam = AdapterExam(
             categoryList!!,
-            requireContext()
+            requireContext(),userID
         )
         val numberOfCollumn=3
 

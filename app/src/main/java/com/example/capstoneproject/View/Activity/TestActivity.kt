@@ -50,6 +50,7 @@ class TestActivity : BaseActivity(), View.OnClickListener {
     var listAnswerUser: MutableList<AnswerUser> = mutableListOf()
     var listAnswer: List<Answer> = mutableListOf()
     private var llProgressBar: LinearLayout? = null
+    private var userID:Int=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +58,7 @@ class TestActivity : BaseActivity(), View.OnClickListener {
         setSupportActionBar(findViewById(R.id.toolbarExam))
         initView()
         val idExam = intent.getIntExtra("idExam", -1)
+        userID = intent.getIntExtra("userID", -1)
         requestUser.examId=idExam
 
         loadQuestion(listQuestion[indexQuestion], indexQuestion+1,0)
@@ -101,7 +103,7 @@ class TestActivity : BaseActivity(), View.OnClickListener {
                     rdD!!.text = listAnswer[3].content
                     llProgressBar?.visibility = View.GONE
                     if(!checkTime) {
-                        coundown(70000)
+                        coundown(900000)
                         checkTime=true
                     }
 
@@ -237,7 +239,7 @@ class TestActivity : BaseActivity(), View.OnClickListener {
                 requestUser.numberFalse=0
                 txtTimer.setText("Done!")
                 val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
-                var call=service.getGradeRequest(requestUser)
+                var call=service.getGradeRequest(requestUser,userID)
                 //Execute the request asynchronously.
                 call.enqueue(object : Callback<RequestUser> {
                     //Handle successfully response
@@ -287,7 +289,7 @@ class TestActivity : BaseActivity(), View.OnClickListener {
                 requestUser.numberFalse=0
                 txtTimer.setText("Done!")
                 val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
-                var call=service.getGradeRequest(requestUser)
+                var call=service.getGradeRequest(requestUser,userID)
                 //Execute the request asynchronously.
                 call.enqueue(object : Callback<RequestUser> {
                     //Handle successfully response

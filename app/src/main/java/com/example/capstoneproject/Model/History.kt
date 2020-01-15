@@ -3,19 +3,24 @@ package com.example.capstoneproject.Model
 import java.io.Serializable
 
 class History:Serializable {
-    var id: Int? = null
     var date: String = ""
-    var point: Float =0.0f
-    var category: String? = ""
+    var grade: Float =0.0f
+    var examDto:examDto?=null
     constructor(
-        id: Int,
         date: String,
-        point:Float,
-        category: String
+        grade:Float,
+        examDto: examDto
     ){
-        this.id=id
-        this.category=category
-        this.point=point
+        this.grade=grade
         this.date=date
+        this.examDto=examDto
+    }
+}
+class examDto:Serializable{
+    var id:Int?=null
+    var examName:String?=null
+    constructor(id:Int,examName:String){
+        this.id=id
+        this.examName=examName
     }
 }

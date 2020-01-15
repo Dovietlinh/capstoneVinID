@@ -48,7 +48,8 @@ open class Dialog {
         val point = dialogView .findViewById(R.id.txtPoint) as TextView
         val numberPass = dialogView .findViewById(R.id.txtPass) as TextView
         val numberFail = dialogView .findViewById(R.id.txtfail) as TextView
-        point.text=requestUser.point.toString()+ " POINT"
+        val pointShow=requestUser.point?.times(10)
+        point.text=pointShow.toString()+ " POINT"
         numberPass.text=requestUser.numberPass.toString()
         numberFail.text=requestUser.numberFalse.toString()
 

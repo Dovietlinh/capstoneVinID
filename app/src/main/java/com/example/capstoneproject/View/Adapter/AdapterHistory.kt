@@ -38,15 +38,18 @@ class AdapterHistory(private val dataList: List<History>,private val context:Con
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.textCategory.text = dataList[position].category
-        holder.txtDate.text = dataList[position].date
+        val index=(position+1)
+        
+        holder.textCategory.text =index.toString()+". "+ dataList[position].examDto?.examName
+//        holder.txtDate.text = dataList[position].date
         var checkPass=" PASS"
-        if(dataList[position].point>=5){
+        if(dataList[position].grade>=0.5){
             holder.txtPoint.setTextColor(Color.GREEN)
         }else{
             holder.txtPoint.setTextColor(Color.RED)
             checkPass =" FAILED"
         }
-        holder.txtPoint.text = dataList[position].point.toString()+checkPass
+        val poi=dataList[position].grade.times(10)
+        holder.txtPoint.text = poi.toString()+checkPass
     }
 }

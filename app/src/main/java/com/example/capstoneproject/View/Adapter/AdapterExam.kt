@@ -18,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.Serializable
 
-class AdapterExam(private val dataList: List<Int>, private val context: Context) :
+class AdapterExam(private val dataList: List<Int>, private val context: Context, private val userID: Int) :
     RecyclerView.Adapter<AdapterExam.CustomViewHolder>() {
     inner class CustomViewHolder(
         //Get a reference to the Views in our layout
@@ -55,6 +55,7 @@ class AdapterExam(private val dataList: List<Int>, private val context: Context)
                     if(response.body()!=null && response.body()?.size!=0){
                         var intentQuiz = Intent(context, TestActivity::class.java)
                         intentQuiz.putExtra("idExam", dataList[position])
+                        intentQuiz.putExtra("userID", userID)
                         val listQuestion=response.body() as List<Question>
                         intentQuiz.putExtra("listQuestion",listQuestion as Serializable)
                         context.startActivity(intentQuiz)

@@ -14,4 +14,5 @@ class Singleton private constructor() {
     }
 
     var token: String? = null
+    var userID:Int?=null
 }

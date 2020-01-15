@@ -17,7 +17,7 @@ import com.example.capstoneproject.R
 import com.example.capstoneproject.View.Fragment.ReviewFragment
 
 
-class AdapterCategory(private val dataList: List<Category>,private val context:Context,private val typeTest:Int):
+class AdapterCategory(private val dataList: List<Category>,private val context:Context,private val typeTest:Int,private val userID:Int):
     RecyclerView.Adapter<AdapterCategory.CustomViewHolder>() {
     inner class CustomViewHolder(
         //Get a reference to the Views in our layout
@@ -62,6 +62,7 @@ class AdapterCategory(private val dataList: List<Category>,private val context:C
                 val listExamFragment= ListExamFragment()
                 val b = Bundle()
                 b.putInt("categoryID",categoryID )
+                b.putInt("userID",userID )
                 b.putInt("mock",1)
                 listExamFragment.setArguments(b)
                 val transaction=(context as AppCompatActivity).supportFragmentManager.beginTransaction()
@@ -71,6 +72,7 @@ class AdapterCategory(private val dataList: List<Category>,private val context:C
                 val listExamFragment= ListExamFragment()
                 val b = Bundle()
                 b.putInt("categoryID",categoryID )
+                b.putInt("userID",userID )
                 b.putInt("mock",0)
                 listExamFragment.setArguments(b)
                 val transaction=(context as AppCompatActivity).supportFragmentManager.beginTransaction()

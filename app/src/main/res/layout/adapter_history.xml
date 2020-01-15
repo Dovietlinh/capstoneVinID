@@ -9,6 +9,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:padding="15dp"
+        android:layout_marginLeft="-15dp"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,7 +34,7 @@
                 <TextView
                     android:id="@+id/txtDate"
                     android:textSize="20dp"
-                    android:text="Jun 09 2007 17:46:21"
+                    android:text="Jun 15 2020 16:46:21"
                     android:layout_marginLeft="20dp"
                     style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
@@ -41,7 +43,7 @@
             </LinearLayout>
             <TextView
                 android:id="@+id/txtPoint"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:text="9 Pass"
                 android:layout_marginLeft="30dp"
                 android:textStyle="bold"

@@ -3,6 +3,7 @@
     <item
         android:id="@+id/lamlai"
         android:title="Làm lại"
+        android:visible="false"
         android:icon="@drawable/ic_replay_black_24dp"
         app:showAsAction="ifRoom|withText"></item>
     <item

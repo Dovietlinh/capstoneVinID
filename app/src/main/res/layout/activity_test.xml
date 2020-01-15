@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:text="Question 1: Communist countries worked on the premise that economic well-being could be best attained by"
+                android:text=""
                 android:textSize="20dp"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="A market economy."
+                    android:text=""
                     android:textSize="20dp" />
 
                 <RadioButton
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="A strong reliance on prices and individuals' self-interests."
+                    android:text=""
                     android:textSize="20dp" />
 
                 <RadioButton
@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="A system of large privately-owned firms."
+                    android:text=""
                     android:textSize="20dp" />
 
                 <RadioButton
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="The actions of government central planners."
+                    android:text=""
                     android:textSize="20dp" />
             </RadioGroup>
 

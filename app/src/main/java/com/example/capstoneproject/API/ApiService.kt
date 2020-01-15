@@ -38,10 +38,11 @@ interface ApiService {
         @Path("id") id: Int
     ): Call<List<Answer>>
 
-    @GET("exam/getAllIdExamByCateId/{id}/{mock}")
+    @GET("exam/getAllIdExamByCateId/{id}/{mock}/{userId}")
     fun listExamByCategoryAndMock(
         @Path("id") id: Int,
-        @Path("mock") mock: Int
+        @Path("mock") mock: Int,
+        @Path("userId") userId: Int
     ): Call<List<Int>>
 
     @POST("user/login")
@@ -50,11 +51,18 @@ interface ApiService {
         @Body user: User
     ): Call<User>
 
-    @POST("exam/getGrade")
+    @POST("exam/getGrade/{id}")
     @Headers("Content-Type: application/json")
     fun getGradeRequest(
-        @Body requestUser: RequestUser
+        @Body requestUser: RequestUser,
+        @Path("id") id: Int
     ): Call<RequestUser>
+
+    @GET("history/getByUserId/{id}")
+    @Headers("Content-Type: application/json")
+    fun listAllHistory(
+        @Path("id") id:Int
+    ): Call<List<History>>
 
     @POST("user/create")
     @FormUrlEncoded
