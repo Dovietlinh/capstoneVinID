@@ -19,7 +19,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@mipmap/ic_launcher" />
+            android:background="@mipmap/ic_launcher_category" />
         <TextView
             android:id="@+id/txtCategory"
             android:textSize="20dp"

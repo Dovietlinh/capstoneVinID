@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:layout_width="120dp"
+    android:layout_height="120dp">
+
+    <TextView
+        android:id="@+id/idExam"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Exam 1"
+        android:textSize="20dp"
+        android:textColor="@color/topBar"
+        android:gravity="center"
+        android:background="@drawable/custom_exam_bolder"/>
+
+</LinearLayout>

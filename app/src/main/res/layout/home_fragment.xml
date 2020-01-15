@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,57 +11,216 @@
         android:columnCount="2"
         android:padding="10dp">
 
-        <TextView
-            android:id="@+id/onThi"
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="10dp"
+            android:background="@color/topBar"
+            android:gravity="center"
             android:onClick="actionOnThi"
+            android:textSize="20dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/onthi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Ôn Thi"
+                    android:textColor="@color/textColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="150dp"
+            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
             android:layout_margin="10dp"
             android:background="@color/topBar"
             android:gravity="center"
-            android:text="Ôn Thi"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/thiThu"
             android:onClick="actionThiThu"
+            android:textSize="20dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/thithu" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Thi Thử"
+                    android:textColor="@color/textColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="150dp"
+            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
             android:layout_margin="10dp"
             android:background="@color/topBar"
             android:gravity="center"
-            android:text="Thi Thử"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/thiThat"
             android:onClick="actionThiThat"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:layout_margin="10dp"
-            android:background="@color/topBar"
-            android:gravity="center"
-            android:text="Thi Thật"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp">
 
-        <TextView
-            android:id="@+id/lichSu"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/thithat" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Thi Thật"
+                    android:textColor="@color/textColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:onClick="actionLichSu"
             android:layout_height="150dp"
+            android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
             android:layout_margin="10dp"
             android:background="@color/topBar"
             android:gravity="center"
-            android:text="Lịch Sử"
-            android:textSize="20dp" />
+            android:onClick="actionLichSu"
+            android:textSize="20dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/history" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Lịch Sử"
+                    android:textColor="@color/textColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <!--        <TextView-->
+        <!--            android:id="@+id/onThi"-->
+        <!--            android:onClick="actionOnThi"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_columnWeight="1"-->
+        <!--            android:layout_gravity="fill_horizontal"-->
+        <!--            android:layout_margin="10dp"-->
+        <!--            android:background="@color/topBar"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="Ôn Thi"-->
+        <!--            android:textSize="20dp" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/thiThu"-->
+        <!--            android:onClick="actionThiThu"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_columnWeight="1"-->
+        <!--            android:layout_gravity="fill_horizontal"-->
+        <!--            android:layout_margin="10dp"-->
+        <!--            android:background="@color/topBar"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="Thi Thử"-->
+        <!--            android:textSize="20dp" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/thiThat"-->
+        <!--            android:onClick="actionThiThat"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_columnWeight="1"-->
+        <!--            android:layout_gravity="fill_horizontal"-->
+        <!--            android:layout_margin="10dp"-->
+        <!--            android:background="@color/topBar"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="Thi Thật"-->
+        <!--            android:textSize="20dp" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/lichSu"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:onClick="actionLichSu"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_columnWeight="1"-->
+        <!--            android:layout_gravity="fill_horizontal"-->
+        <!--            android:layout_margin="10dp"-->
+        <!--            android:background="@color/topBar"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="Lịch Sử"-->
+        <!--            android:textSize="20dp" />-->
 
     </GridLayout>
 </ScrollView>
