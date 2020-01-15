@@ -83,7 +83,6 @@
         android:background="@drawable/btn_custom"
         android:onClick="loginAction"
         android:text="Login"/>
-
     <include
         android:id="@+id/llProgressBar"
         layout="@layout/loading"

@@ -33,8 +33,12 @@ class ProfileFragment : Fragment(){
         llProgressBar?.visibility = View.VISIBLE
         test.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
-                var user=response.body() as User
-                binding?.setUser(user)
+                if(response.body()!=null){
+                    var user=response.body() as User
+                    binding?.setUser(user)
+                }else{
+                    Toast.makeText(context,"User null",Toast.LENGTH_LONG).show()
+                }
                 llProgressBar.visibility = View.GONE
             }
             override fun onFailure(call: Call<User>, t: Throwable) {

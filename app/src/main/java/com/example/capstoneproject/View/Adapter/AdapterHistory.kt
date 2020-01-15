@@ -1,9 +1,11 @@
 package com.example.capstoneproject.View.Adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.Model.Category
 import androidx.appcompat.widget.AppCompatImageView
@@ -17,7 +19,9 @@ class AdapterHistory(private val dataList: List<History>,private val context:Con
         //Get a reference to the Views in our layout
         myView: View
     ) : RecyclerView.ViewHolder(myView) {
-//        var textCategory: TextView = myView.findViewById(com.example.capstoneproject.R.id.txtCategory)
+        var textCategory: TextView = myView.findViewById(R.id.txtCategory)
+        var txtDate: TextView = myView.findViewById(R.id.txtDate)
+        var txtPoint: TextView = myView.findViewById(R.id.txtPoint)
     }
     var icon:AppCompatImageView?=null
     override fun onCreateViewHolder(
@@ -34,8 +38,15 @@ class AdapterHistory(private val dataList: List<History>,private val context:Con
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-//        holder.textCategory.text = dataList[position].categoryName
-//        holder.textCategory.setOnClickListener{
-//        }
+        holder.textCategory.text = dataList[position].category
+        holder.txtDate.text = dataList[position].date
+        var checkPass=" PASS"
+        if(dataList[position].point>=5){
+            holder.txtPoint.setTextColor(Color.GREEN)
+        }else{
+            holder.txtPoint.setTextColor(Color.RED)
+            checkPass =" FAILED"
+        }
+        holder.txtPoint.text = dataList[position].point.toString()+checkPass
     }
 }

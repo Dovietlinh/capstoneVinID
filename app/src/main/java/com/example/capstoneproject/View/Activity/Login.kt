@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.capstoneproject.API.ApiService
 import com.example.capstoneproject.API.RestClient
+import com.example.capstoneproject.Base.Singleton
 import com.example.capstoneproject.User
 import com.example.capstoneproject.R
 import com.example.capstoneproject.View.Fragment.HomeFragment
@@ -43,15 +44,18 @@ class Login : AppCompatActivity() {
         userLogin.userName=user
         val service = RestClient.retrofitInstance!!.create(ApiService::class.java)
         var test=service.checkLogin(userLogin)
+        var first = Singleton.instance  // This (Singleton@7daf6ecc) is a
+        // singleton
         test.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 var userLogin=response.body() as User
                 if(userLogin==null){
                     notification_Fail.visibility=View.VISIBLE
-
                 }else{
+                    first.token = "hello singleton ok"
                     var intent=Intent(this@Login,MainActivity::class.java)
                     intent.putExtra("userID", userLogin.id)
+                    intent.putExtra("token", first.token)
                     startActivity(intent)
                 }
                 llProgressBar?.visibility = View.GONE

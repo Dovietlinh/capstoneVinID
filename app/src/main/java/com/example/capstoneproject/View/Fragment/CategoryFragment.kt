@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,14 +52,18 @@ class CategoryFragment: Fragment() {
             //Handle successfully response
             override
             fun onResponse(call: Call<List<Category>>, response: Response<List<Category>>) {
-                loadDataList(response.body())
-                llProgressBar?.visibility=View.GONE
+                if(response.body()!=null){
+                    loadDataList(response.body())
 
+                }else{
+                    Toast.makeText(context,"Không có môn học nào",Toast.LENGTH_LONG).show()
+                }
+                llProgressBar?.visibility=View.GONE
             }
             //Handle failure
             override
             fun onFailure(call: Call<List<Category>>, throwable: Throwable) {
-
+                llProgressBar?.visibility=View.GONE
             }
         })
 

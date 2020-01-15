@@ -8,6 +8,7 @@ import retrofit2.http.*
 interface ApiService {
     //Specify the request type and pass the related URL
     @get:GET("category/getAll")
+//    @Headers({"Authorization", "Bearer "+ token})
     // Wrap the response in a Call with the type of the expected result
     val allCategory: Call<List<Category>>
 

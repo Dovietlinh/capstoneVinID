@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.myProfile -> {
                 val userLogin = intent.getIntExtra("userID",0)
+                val token = intent.getStringExtra("token")
                 val b = Bundle()
                 b.putInt("userID", userLogin)
                 val profileFragment= ProfileFragment()

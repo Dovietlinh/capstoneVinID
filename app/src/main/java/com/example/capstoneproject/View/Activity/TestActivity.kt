@@ -166,7 +166,6 @@ class TestActivity : BaseActivity(), View.OnClickListener {
         bottomSheetBehavior.setBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
             }
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
